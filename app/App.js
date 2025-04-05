@@ -21,7 +21,7 @@ async function App(url) {
   let avatarPath, thumbnailPath, videoPath, audioPath, finalPath;
 
   try {
-    const raw = await youtubeDl(url, { dumpSingleJson: true, addHeader: ['referer:youtube.com', 'user-agent:googlebot'], cookies: './cookies.txt' });
+    const raw = await youtubeDl(url, { dumpSingleJson: true, addHeader: ['referer:youtube.com', 'user-agent:googlebot'], cookies: './app/cookies.txt' });
 
     const data = {
       'Link': raw.webpage_url,
@@ -48,10 +48,10 @@ async function App(url) {
     downloadImg(raw.thumbnail, thumbnailPath);
 
     videoPath = path.join(downloadsDir, 'videoOnly.mp4');
-    await youtubeDl(url, { f: '136/135/134/bestvideo[ext=mp4]', o: videoPath, cookies: './cookies.txt' });
+    await youtubeDl(url, { f: '136/135/134/bestvideo[ext=mp4]', o: videoPath, cookies: './app/cookies.txt' });
 
     audioPath = path.join(downloadsDir, 'audioOnly.m4a');
-    await youtubeDl(url, { f: '140/bestaudio[ext=m4a]', o: audioPath, cookies: './cookies.txt' });
+    await youtubeDl(url, { f: '140/bestaudio[ext=m4a]', o: audioPath, cookies: './app/cookies.txt' });
 
     finalPath = path.join(downloadsDir, data.Media);
     await mergeVideo(videoPath, audioPath, finalPath);
