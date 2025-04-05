@@ -48,10 +48,10 @@ async function App(url) {
     downloadImg(raw.thumbnail, thumbnailPath);
 
     videoPath = path.join(downloadsDir, 'videoOnly.mp4');
-    await youtubeDl(url, { f: '136/135/134/bestvideo[ext=mp4]', o: videoPath });
+    await youtubeDl(url, { f: '136/135/134/bestvideo[ext=mp4]', o: videoPath, addHeader: ['referer:youtube.com', 'user-agent:googlebot'] });
 
     audioPath = path.join(downloadsDir, 'audioOnly.m4a');
-    await youtubeDl(url, { f: '140/bestaudio[ext=m4a]', o: audioPath });
+    await youtubeDl(url, { f: '140/bestaudio[ext=m4a]', o: audioPath, addHeader: ['referer:youtube.com', 'user-agent:googlebot'] });
 
     finalPath = path.join(downloadsDir, data.Media);
     await mergeVideo(videoPath, audioPath, finalPath);
