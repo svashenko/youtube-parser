@@ -15,7 +15,7 @@ async function App(url) {
   const downloadsDir = './app/downloads';
   if (!fs.existsSync(downloadsDir)) fs.mkdirSync(downloadsDir, { recursive: true });
 
-  const exelPath = path.join(downloadsDir, 'YouTube.xlsx');
+  const exelPath = path.join(downloadsDir, 'horizontal_videos.xlsx');
   const workbook = fs.existsSync(exelPath) ? readFile(exelPath) : createExel(exelPath);
 
   let avatarPath, thumbnailPath, videoPath, audioPath, finalPath;
@@ -26,19 +26,19 @@ async function App(url) {
     const data = {
       'Link': raw.webpage_url,
       'Language': raw.language.toUpperCase(),
+      'Author_Name': raw.channel,
+      'Name': raw.title,
+      'Length': raw.duration_string,
+      'Description': raw.description,
       'Views': raw.view_count,
-      'Followers': raw.channel_follower_count,
       'Likes': raw.like_count,
       'Comments': raw.comment_count,
       'Date': formatDate(raw.upload_date),
-      'Length': raw.duration_string,
+      'Video_File': `video_${Date.now()}_${Math.random().toString(36).substr(2, 9)}.mp4`,
+      'Preview_File': `media_${Date.now()}.jpg`,
+      'Author_Picture_File': `author_${Date.now()}.jpg`,
+      'Followers': raw.channel_follower_count,
       'Genre': raw.categories.toString(),
-      'Author_Name': raw.channel,
-      'Author_Picture': `author_${Date.now()}.jpg`,
-      'Name': raw.title,
-      'Media_Picture': `media_${Date.now()}.jpg`,
-      'Media': `video_${Date.now()}_${Math.random().toString(36).substr(2, 9)}.mp4`,
-      'Description': raw.description,
     };
 
     avatarPath = path.join(downloadsDir, data.Author_Picture);

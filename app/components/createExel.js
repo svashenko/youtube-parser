@@ -4,21 +4,21 @@ function createExel(exelPath) {
   try {
     const workbook = xlsx.utils.book_new();
     const worksheet = xlsx.utils.aoa_to_sheet([[
-      'Link',
+      'Number',
       'Language',
+      'Author_Name',
+      'Name',
+      'Length',
+      'Description',
       'Views',
-      'Followers',
       'Likes',
       'Comments',
       'Date',
-      'Length',
+      'Video_File',
+      'Preview_File',
+      'Author_Picture_File',
+      'Followers',
       'Genre',
-      'Author_Name',
-      'Author_Picture',
-      'Name',
-      'Media_Picture',
-      'Media',
-      'Description'
     ]]);
 
     xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
