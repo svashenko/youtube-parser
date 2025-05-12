@@ -58,8 +58,7 @@ async function App(url) {
 
     await writeExel(workbook, data, exelPath);
 
-    console.log('DONE!!!');
-    return 'DONE!!!';
+    return 'Done!';
   } catch (error) {
     console.log('Cleaning files because of: ', error.message);
 
